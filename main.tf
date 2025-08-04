@@ -1,5 +1,4 @@
 provider "google" {
-  credentials = file("${path.module}/account.json")
   project     = "absolute-hub-460713-v0"
   region      = "us-central1"
   zone        = "us-central1-a"
