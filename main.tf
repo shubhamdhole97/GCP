@@ -1,7 +1,7 @@
 provider "google" {
-  project     = "absolute-hub-460713-v0"
-  region      = "us-central1"
-  zone        = "us-central1-a"
+  project = "absolute-hub-460713-v0"
+  region  = "us-central1"
+  zone    = "us-central1-a"
 }
 
 resource "google_compute_instance" "hello_vm" {

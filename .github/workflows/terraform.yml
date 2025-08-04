@@ -9,14 +9,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
+    - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v3
 
-    - name: Decode and write GCP credentials
-      run: echo "${{ secrets.GOOGLE_CREDENTIALS_B64 }}" | base64 -d > account.json
+    - name: Write GOOGLE_CREDENTIALS to file
+      run: echo '${{ secrets.GOOGLE_CREDENTIALS }}' > account.json
+
+    - name: Set GOOGLE_APPLICATION_CREDENTIALS environment variable
+      run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/account.json" >> $GITHUB_ENV
 
     - name: Terraform Init
       run: terraform init
@@ -24,5 +27,5 @@ jobs:
     - name: Terraform Plan
       run: terraform plan
 
-    - name: Terraform Apply (Auto-Approve)
+    - name: Terraform Apply
       run: terraform apply -auto-approve
